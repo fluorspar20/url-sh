@@ -4,30 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Url Shortener</title>
 </head>
 
 <body>
-    <h1>URL Shortener</h1>
-    <form action="/shortUrl" method="POST" onsubmit="(e) => {e.preventDefault()}">
-        <input type="url" name="fullUrl" id="fullUrl" placeholder="Enter Url" required>
-        <button type="submit">Generate Url</button>
-    </form>
-    <table>
-        <tbody>
-            <% shortUrls.forEach(shortUrl => { %>
+    <div class="container">
+        <h1>URL Shortener</h1>
+        <form action="/shortUrl" method="POST" onsubmit="(e) => {e.preventDefault()}" class="my-4 form-inline">
+            <input type="url" name="fullUrl" id="fullUrl" placeholder="Enter Url" required>
+            <button type="submit">Generate Url</button>
+        </form>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                  <th>Full URL</th>
+                  <th>Short URL</th>
+                </tr>
+              </thead>
+            <tbody>
+                <% shortUrls.forEach(shortUrl => { %>
                 <tr>
                     <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
                     <td><a href="<%= shortUrl.short %>"><span class="baseUrl"></span><%= shortUrl.short %></a></td>
                 </tr>
                 <% })
             %>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     <script>
         const baseUrl = window.location.origin
         console.log(baseUrl)
-        document.querySelectorAll('.baseUrl').forEach((span) => span.innerHTML= `${baseUrl}/`) 
+        document.querySelectorAll('.baseUrl').forEach((span) => span.innerHTML = `${baseUrl}/`) 
     </script>
 </body>
 
